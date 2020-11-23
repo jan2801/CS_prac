@@ -19,6 +19,9 @@ namespace Lab1
         }
 
         public abstract string ToLongString();
+
+        public abstract string ToLongString(string format);
+       
         public abstract Vector2[] Nearest(Vector2 v);
 
         public override string ToString()

@@ -1,13 +1,15 @@
 using System;
+using System.Collections;
 using System.Numerics;
 using System.Collections.Generic;
 
 
 namespace Lab1
 {
-    class V3DataCollection: V3Data
+    class V3DataCollection: V3Data, IEnumerable<DataItem>
     {
 
+        
         public List<DataItem> lst_d { get; set; }
 
         public V3DataCollection(string st, DateTime d_t) : base(st, d_t)
@@ -41,7 +43,7 @@ namespace Lab1
         public override Vector2[] Nearest(Vector2 v)
         {
             List<Vector2> near = new List<Vector2>();
-            float ebs = 0.00001F;
+            float ebs = 0.000000001F;
             float minim;
             minim = Vector2.Distance(lst_d[0].coor, v);
         
@@ -87,5 +89,31 @@ namespace Lab1
             }
             return s;
         }
+
+
+        public override string ToLongString(string format)
+        {
+            string s;
+            s = "V3DataCollection" + " " + meas_ident + " " + d_time.ToString(format) + " " + lst_d.Count.ToString(format) + "\n";
+            foreach (DataItem item in lst_d)
+            {
+                s += item.ToString(format) + "\n";
+            }
+            return s;
+        }
+
+
+        public IEnumerator<DataItem> GetEnumerator()
+        {
+            return lst_d.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            
+            return lst_d.GetEnumerator();
+        }
+
+
     }
 }

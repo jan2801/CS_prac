@@ -1,6 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+
+using System.IO;
+
 
 
 namespace Lab1
@@ -8,7 +12,7 @@ namespace Lab1
 
 
 
-    class V3DataOnGrid: V3Data
+    class V3DataOnGrid: V3Data, IEnumerable<DataItem>
     {
         public Grid1D x { get; set; }
         public Grid1D y { get; set; }
@@ -22,6 +26,85 @@ namespace Lab1
             x = xx;
             y = yy;
             values = new double[x.number, y.number];
+        }
+
+        public V3DataOnGrid(string filename): base("", new DateTime())
+        {
+
+            FileStream fstream = null;
+            try
+            {
+
+
+                    fstream = new FileStream(filename, FileMode.Open);
+                
+                    // преобразуем строку в байты
+                    byte[] array = new byte[fstream.Length];
+                    // считываем данные
+                    fstream.Read(array, 0, array.Length);
+                    // декодируем байты в строку
+                    string textFromFile = System.Text.Encoding.Default.GetString(array);
+                    Console.WriteLine($"Text from file: {textFromFile}");
+
+                    float st;
+                    int   n;
+                
+                    
+
+                    
+                    string[] words = textFromFile.Split(' ');
+                    
+                    meas_ident = words[0];
+        
+                    
+                    st = (float) Convert.ToDouble(words[2]);
+            
+                    n = Convert.ToInt32(words[3]);
+                    
+                    d_time = Convert.ToDateTime(words[1]);
+                    
+                    x = new Grid1D(st, n);
+                    st = (float) Convert.ToDouble(words[4]);
+                    n = Convert.ToInt32(words[5]);
+                    
+        
+                    y = new Grid1D(st, n);
+                    values = new double[x.number, y.number];
+                    for (int i = 0; i < x.number; i++)
+                    {
+                        for (int j = 0; j < y.number; j++)
+                        {
+                            values[i, j] = Convert.ToDouble(words[6 + i * x.number + j]);
+                        }
+                    }
+                      
+                       
+                        
+
+                    
+
+            
+
+
+                
+
+            }
+
+            catch (Exception ex)
+            {
+                
+                
+                Console.WriteLine(ex.Message);
+           
+            }
+
+            finally
+            {
+                if (fstream != null)
+                {
+                    fstream.Close(); 
+                }
+            }
         }
 
         public void InitRandom(double minValue, double maxValue)
@@ -60,7 +143,7 @@ namespace Lab1
         {
             Vector2 new_coor;
             DataItem el;
-            float ebs = 0.00001F;
+            float ebs = 0.0000000001F;
             float minim;
             
             List<Vector2> l = new List<Vector2>();
@@ -108,6 +191,57 @@ namespace Lab1
                 }
             return st_1;
         }
+
+        public override string ToLongString(string format)
+        {
+            string st_1 = "V3DataOnGrid";
+            st_1 += " " + meas_ident + " " + d_time.ToString(format) + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
+            for (int i = 0; i < x.number; i++)
+                for (int j = 0; j < y.number; j++)
+                {
+                    st_1 += "values[" + i * x.step + "," + j * y.step + "] = "  + values[i, j]  + "\n";
+                }
+            return st_1;
+        }
+
+        public IEnumerator<DataItem> GetEnumerator()
+        {
+            List<DataItem> item_list = new List<DataItem>();
+            DataItem di;
+            Vector2 coor;
+            double val;
+            for (int i = 0; i < x.number; i++)
+                for (int j = 0; j < y.number; j++)
+                {
+                    coor.X = i;
+                    coor.Y = j;
+                    val = values[i, j];
+                   
+                    di = new DataItem(coor, val);
+                    item_list.Add(di);
+                }
+            return item_list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            List<DataItem> item_list = new List<DataItem>();
+            DataItem di;
+            Vector2 coor;
+            double val;
+            for (int i = 0; i < x.number; i++)
+                for (int j = 0; j < y.number; j++)
+                {
+                    coor.X = i;
+                    coor.Y = j;
+                    val = values[i, j];
+                   
+                    di = new DataItem(coor, val);
+                    item_list.Add(di);
+                }
+            return item_list.GetEnumerator();
+        }
+
 
         
     }

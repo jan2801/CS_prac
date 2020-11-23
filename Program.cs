@@ -22,6 +22,11 @@ namespace Lab1
         {
             return coor.ToString() + "" + electro_m_field.ToString();
         }
+
+        public string ToString(string format)
+        {
+            return coor.ToString(format) + "" + electro_m_field.ToString(format);
+        }
     }
 
     struct Grid1D
@@ -40,6 +45,11 @@ namespace Lab1
         {
             return step.ToString() + "" + number.ToString();
         }
+
+        public string ToString(string format)
+        {
+            return step.ToString(format) + "" + number.ToString(format);
+        }
     }
 
 
@@ -47,7 +57,7 @@ namespace Lab1
     {
             public static int Main()
             { 
-                Console.WriteLine("TASK №1");
+                /* Console.WriteLine("TASK №1");
                 string s = "sdsafasf";
                 float st_x = 1.0F;
                 int num_x = 10;
@@ -89,8 +99,42 @@ namespace Lab1
 
                 }
 
-                return 0;
+                return 0; */
+                Console.WriteLine("TASK №1");
+                V3DataOnGrid d_gr = new V3DataOnGrid("testfile.txt");
+                Console.WriteLine(d_gr.ToLongString("me"));
 
-        }
+                Console.WriteLine("TASK №2");
+                V3MainCollection v = new V3MainCollection();
+                v.AddDefaults();
+                Console.WriteLine(v.Count);
+                Console.WriteLine("this is number of elements in list");
+                Console.WriteLine("and under this you can find them");
+
+                Console.WriteLine(v.ToString());
+
+                Console.WriteLine("TASK №3");
+
+                Console.WriteLine("RMin for vector2(21, 3):\n");
+                Console.WriteLine($"{v.RMin(new Vector2(21, 3))}\n");
+
+                Console.WriteLine("RMinDataItem for vecor2(21, 3):\n");
+                Console.WriteLine($"\n{v.RMinDataItem(new Vector2(21, 3))}\n");
+
+
+                Console.WriteLine("Except on Grid:");
+                var gr_ex = v.ExGrid;
+                foreach (Vector2 vec in gr_ex)
+                {
+                    Console.WriteLine(vec);
+                }
+
+
+                
+
+                return 0;
+            
+
+            }
     }
 }

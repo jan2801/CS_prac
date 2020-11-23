@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 
 namespace Lab1
@@ -25,9 +26,32 @@ namespace Lab1
             return this.GetEnumerator();
         }
 
+
+        public IEnumerable<Vector2> ExGrid
+        {
+            get
+            {
+                var dg = v3.Where(obj => obj is V3DataOnGrid)
+                                        .Select(v3_b);
+                var dc = v3.Where(obj => obj is V3DataCollection)
+                                        .Select(v3_b);
+
+                var qgrid = from data in dg from vector in data select vector.coor;
+
+                var qvcollect = from data in dc from vector in data select vector.coor;
+
+                return qvcollect.Except(qgrid).Distinct();
+            }
+        }
+
         public void Add(V3Data m)
         {
             v3.Add(m);
+        }
+
+        private V3DataCollection v3_b(V3Data elem)
+        {
+            return elem is V3DataOnGrid ? (V3DataCollection) (elem as V3DataOnGrid) : elem as V3DataCollection;
         }
 
 
@@ -55,6 +79,41 @@ namespace Lab1
             return st;
         }
 
+        public float RMin (Vector2 v)
+        {
+            return v3
+                .Select(v3_b)
+                .Where(x => x.lst_d.Count() > 0)
+                .Select(x => x.Nearest(v))
+                .Select(x => Vector2.Distance(x.First(), v))
+                .Min();
+
+            //выбираем минимум
+        }
+
+        public DataItem RMinDataItem (Vector2 v)
+        {
+            var q1 = v3.Select(v3_b);
+            var q2 = from d in q1 from vector in d select vector;
+
+  
+
+            return q2.OrderBy(item => Vector2.Distance(item.coor, v)).First();
+        }
+
+        
+
+
+        public string ToLongString(string format)
+        {
+            string st = "";
+            foreach (V3Data elem in v3.ToList())
+            {
+                st += elem.ToLongString(format);
+            }
+            return st;
+        }
+
 
         public void AddDefaults()
         {
@@ -65,6 +124,14 @@ namespace Lab1
             int num_x = 10;
             float st_y = 1.5F;
             int num_y = 10;
+
+      
+
+         
+            string defstr = "default";
+            
+            
+
             Grid1D x1 = new Grid1D (st_x, num_x);
             Grid1D y1 = new Grid1D (st_y, num_y);
             Grid1D x2 = new Grid1D (222.0F, 30);
@@ -84,6 +151,21 @@ namespace Lab1
             v3.Add(d_grr);
             v3.Add(d_grr1);
             v3.Add(d_grrrrr);
+
+
+            // V3DataOnGrid
+            
+        
+  
+            // V3DataCollection
+            v3.Add((V3DataCollection)(v3[0] as V3DataOnGrid));
+
+   
+           
+
+
+            v3.Add(new V3DataCollection(defstr, date1));
+            v3.Add(new V3DataOnGrid("", new DateTime(), new Grid1D(0, 0), new Grid1D(0, 0)));
 
         }
     }
