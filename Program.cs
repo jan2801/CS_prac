@@ -101,6 +101,7 @@ namespace Lab1
 
                 return 0; */
                 Console.WriteLine("TASK №1");
+                V3DataOnGrid d_gr_f = new V3DataOnGrid("fakefile.txt");
                 V3DataOnGrid d_gr = new V3DataOnGrid("testfile.txt");
                 Console.WriteLine(d_gr.ToLongString("me"));
 
@@ -128,6 +129,8 @@ namespace Lab1
                 {
                     Console.WriteLine(vec);
                 }
+
+
 
 
                 
