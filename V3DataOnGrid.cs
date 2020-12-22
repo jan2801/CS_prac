@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Globalization;
 
 using System.IO;
 
@@ -30,7 +31,7 @@ namespace Lab1
 
         public V3DataOnGrid(string filename): base("", new DateTime())
         {
-
+            CultureInfo CI = new CultureInfo("ru-RU");
             FileStream fstream = null;
             try
             {
@@ -57,15 +58,16 @@ namespace Lab1
                     meas_ident = words[0];
         
                     
-                    st = (float) Convert.ToDouble(words[2]);
+                    st = (float) Convert.ToDouble(words[2], CI);
             
-                    n = Convert.ToInt32(words[3]);
+                    n = Convert.ToInt32(words[3], CI);
                     
-                    d_time = Convert.ToDateTime(words[1]);
-                    
+                    d_time = Convert.ToDateTime(words[1], CI);
+                    Console.WriteLine(d_time);
+                    Console.WriteLine("lol");
                     x = new Grid1D(st, n);
-                    st = (float) Convert.ToDouble(words[4]);
-                    n = Convert.ToInt32(words[5]);
+                    st = (float) Convert.ToDouble(words[4], CI);
+                    n = Convert.ToInt32(words[5], CI);
                     
         
                     y = new Grid1D(st, n);
@@ -74,7 +76,7 @@ namespace Lab1
                     {
                         for (int j = 0; j < y.number; j++)
                         {
-                            values[i, j] = Convert.ToDouble(words[6 + i * x.number + j]);
+                            values[i, j] = Convert.ToDouble(words[6 + i * x.number + j], CI);
                         }
                     }
                       
@@ -196,6 +198,7 @@ namespace Lab1
         {
             string st_1 = "V3DataOnGrid";
             st_1 += " " + meas_ident + " " + d_time.ToString(format) + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
+            Console.WriteLine(st_1);
             for (int i = 0; i < x.number; i++)
                 for (int j = 0; j < y.number; j++)
                 {
@@ -218,9 +221,9 @@ namespace Lab1
                     val = values[i, j];
                    
                     di = new DataItem(coor, val);
-                    item_list.Add(di);
+                    yield return di;
                 }
-            return item_list.GetEnumerator();
+            //return item_list.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -237,9 +240,9 @@ namespace Lab1
                     val = values[i, j];
                    
                     di = new DataItem(coor, val);
-                    item_list.Add(di);
+                    yield return di;
                 }
-            return item_list.GetEnumerator();
+           // return item_list.GetEnumerator();
         }
 
 

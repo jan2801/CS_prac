@@ -5,7 +5,6 @@ using System.Numerics;
 
 namespace Lab1
 {
-
     struct DataItem
     {
         public System.Numerics.Vector2 coor;
@@ -103,7 +102,7 @@ namespace Lab1
                 Console.WriteLine("TASK №1");
                 V3DataOnGrid d_gr_f = new V3DataOnGrid("fakefile.txt");
                 V3DataOnGrid d_gr = new V3DataOnGrid("testfile.txt");
-                Console.WriteLine(d_gr.ToLongString("me"));
+                Console.WriteLine(d_gr.ToLongString("hey"));
 
                 Console.WriteLine("TASK №2");
                 V3MainCollection v = new V3MainCollection();
