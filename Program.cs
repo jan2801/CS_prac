@@ -93,7 +93,7 @@ namespace Lab1
                 
                 v.Add(new V3DataCollection("new_one", new DateTime()));
                 v.Add(new V3DataCollection("new one 2", DateTime.Now)); //add
-                v[1].meas_ident = "this measure"; //change
+                v[1].measure = "this measure"; //change
                // v.AddDefaults();
                 Console.WriteLine(v.Count);
                 
