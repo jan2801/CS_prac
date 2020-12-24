@@ -82,9 +82,10 @@ namespace Lab1
 
                 Console.WriteLine(v.ToString());
 
-                
+                   
+                   
 
-                Console.WriteLine("TASK №3");
+                Console.WriteLine("TASK №3"); 
                 Vector2 vect = new Vector2(23.0F, 14.0F);
                 int counter = 1;
                 foreach(V3Data obj in v)
