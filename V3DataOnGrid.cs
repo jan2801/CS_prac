@@ -22,8 +22,8 @@ namespace Lab1
 
         public V3DataOnGrid(string id, DateTime dt, Grid1D xx, Grid1D yy): base(id, dt)
         {
-            meas_ident = id;
-            d_time = dt;
+            measure = id;
+            date = dt;
             x = xx;
             y = yy;
             values = new double[x.number, y.number];
@@ -55,15 +55,15 @@ namespace Lab1
                     
                     string[] words = textFromFile.Split(' ');
                     
-                    meas_ident = words[0];
+                    measure = words[0];
         
                     
                     st = (float) Convert.ToDouble(words[2], CI);
             
                     n = Convert.ToInt32(words[3], CI);
                     
-                    d_time = Convert.ToDateTime(words[1], CI);
-                    Console.WriteLine(d_time);
+                    date = Convert.ToDateTime(words[1], CI);
+                    Console.WriteLine(date);
                     Console.WriteLine("lol");
                     x = new Grid1D(st, n);
                     st = (float) Convert.ToDouble(words[4], CI);
@@ -125,7 +125,7 @@ namespace Lab1
 
         public static implicit operator V3DataCollection(V3DataOnGrid v)
         {
-            V3DataCollection col = new V3DataCollection(v.meas_ident, v.d_time);
+            V3DataCollection col = new V3DataCollection(v.measure, v.date);
             Vector2 c;
             double elfield;
             for (int i = 0; i < v.x.number; i++)
@@ -179,13 +179,13 @@ namespace Lab1
         public override string ToString()
         {
             string st_1 = "V3DataOnGrid";
-            return (st_1 + " " + meas_ident + " " + d_time.ToString() + "  " + x.ToString() + " " +  y.ToString() + "\n");
+            return (st_1 + " " + measure + " " + date.ToString() + "  " + x.ToString() + " " +  y.ToString() + "\n");
         }
 
         public override string ToLongString()
         {
             string st_1 = "V3DataOnGrid";
-            st_1 += " " + meas_ident + " " + d_time.ToString() + "  " + x.ToString() + " " +  y.ToString() + "\n";
+            st_1 += " " + measure + " " + date.ToString() + "  " + x.ToString() + " " +  y.ToString() + "\n";
             for (int i = 0; i < x.number; i++)
                 for (int j = 0; j < y.number; j++)
                 {
@@ -197,7 +197,7 @@ namespace Lab1
         public override string ToLongString(string format)
         {
             string st_1 = "V3DataOnGrid";
-            st_1 += " " + meas_ident + " " + d_time.ToString(format) + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
+            st_1 += " " + measure + " " + date.ToString(format) + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
             Console.WriteLine(st_1);
             for (int i = 0; i < x.number; i++)
                 for (int j = 0; j < y.number; j++)

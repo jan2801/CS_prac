@@ -83,7 +83,7 @@ namespace Lab1
                 V3DataOnGrid d_gr = new V3DataOnGrid(s, date1, x1, y1);
                 d_gr.InitRandom(34.0, 67.0);
                
-                d_gr.meas_ident = "my measure"; 
+                d_gr.measure = "my measure"; 
                 V3DataCollection d_c = d_gr;
                 Console.WriteLine(d_gr.ToLongString());
                 

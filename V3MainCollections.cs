@@ -106,7 +106,7 @@ namespace Lab1
             
             foreach (V3Data el in v3.ToList())
             {
-                if (el.meas_ident == id && el.d_time == date)
+                if (el.measure == id && el.date == date)
                 {
                     el.PropertyChanged -= PropertyChangedEventHandler;
                 }
@@ -114,7 +114,7 @@ namespace Lab1
             
             foreach (V3Data el in v3.ToList())
             {
-                if (el.meas_ident == id && el.d_time == date)
+                if (el.measure == id && el.date == date)
                 {
                     
                     v3.Remove(el);

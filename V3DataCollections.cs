@@ -14,8 +14,8 @@ namespace Lab1
 
         public V3DataCollection(string st, DateTime d_t) : base(st, d_t)
         {
-            meas_ident = st;
-            d_time = d_t;
+            measure = st;
+            date = d_t;
             lst_d = new List<DataItem>();
         }
         
@@ -76,13 +76,13 @@ namespace Lab1
         public override string ToString()
         {
             string s;
-            s = "V3DataCollection" + " " + meas_ident + " " + d_time.ToString() + " " + lst_d.Count.ToString() + "\n";
+            s = "V3DataCollection" + " " + measure + " " + date.ToString() + " " + lst_d.Count.ToString() + "\n";
             return s;
         }
         public override string ToLongString()
         {
             string s;
-            s = "V3DataCollection" + " " + meas_ident + " " + d_time.ToString() + " " + lst_d.Count.ToString() + "\n";
+            s = "V3DataCollection" + " " + measure + " " + date.ToString() + " " + lst_d.Count.ToString() + "\n";
             foreach (DataItem item in lst_d)
             {
                 s += item.ToString() + "\n";
@@ -94,7 +94,7 @@ namespace Lab1
         public override string ToLongString(string format)
         {
             string s;
-            s = "V3DataCollection" + " " + meas_ident + " " + d_time.ToString(format) + " " + lst_d.Count.ToString(format) + "\n";
+            s = "V3DataCollection" + " " + measure + " " + date.ToString(format) + " " + lst_d.Count.ToString(format) + "\n";
             foreach (DataItem item in lst_d)
             {
                 s += item.ToString(format) + "\n";

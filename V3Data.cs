@@ -6,12 +6,12 @@ using System.ComponentModel;
 
 namespace Lab1
 {
-    abstract class V3Data
+    abstract class V3Data: INotifyPropertyChanged
     {
 
-        public string meas_ident;
+        private string meas_ident;
 
-        public DateTime d_time;
+        private DateTime d_time;
 
         
 
@@ -20,12 +20,7 @@ namespace Lab1
 
         
 
-        public V3Data(string id, DateTime t)
-        {
-            meas_ident = id;
-            d_time = t;
-        }
-
+        
         public string measure
         {
             get
@@ -35,7 +30,8 @@ namespace Lab1
             set
             {
                 meas_ident = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("measure was changed"));
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("measure was changed"));
             }
         }
 
@@ -48,9 +44,18 @@ namespace Lab1
             set
             {
                 d_time = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("date was changed"));
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("date was changed"));
             }
         }
+
+
+        public V3Data(string id, DateTime t)
+        {
+            measure = id;
+            date= t;
+        }
+
 
         public abstract string ToLongString();
 
