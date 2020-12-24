@@ -81,7 +81,15 @@ namespace Lab1
 
         public float RMin (Vector2 v)
         {
-            return v3.Select(v3_b).Where(vec => vec.lst_d.Count() > 0).Select(vec => vec.Nearest(v)).Select(vec => Vector2.Distance(vec.First(), v)).Min();
+            var q1 = v3.Select(v3_b);
+            var q2 = from d in q1 from vector in d select vector;
+
+  
+
+            DataItem min = q2.OrderBy(item => Vector2.Distance(item.coor, v)).First();
+            return Vector2.Distance(min.coor, v);
+
+            //return v3.Select(v3_b).Where(vec => vec.lst_d.Count() > 0).Select(vec => vec.Nearest(v)).Select(vec => Vector2.Distance(vec.First(), v)).Min();
 
             //выбираем минимум
         }

@@ -22,8 +22,6 @@ namespace Lab1
 
         public V3DataOnGrid(string id, DateTime dt, Grid1D xx, Grid1D yy): base(id, dt)
         {
-            meas_ident = id;
-            d_time = dt;
             x = xx;
             y = yy;
             values = new double[x.number, y.number];
@@ -82,14 +80,6 @@ namespace Lab1
                       
                        
                         
-
-                    
-
-            
-
-
-                
-
             }
 
             catch (Exception ex)
@@ -197,7 +187,7 @@ namespace Lab1
         public override string ToLongString(string format)
         {
             string st_1 = "V3DataOnGrid";
-            st_1 += " " + meas_ident + " " + d_time.ToString(format) + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
+            st_1 += " " + meas_ident + " " + d_time + "  " + x.ToString(format) + " " +  y.ToString(format) + "\n";
             Console.WriteLine(st_1);
             for (int i = 0; i < x.number; i++)
                 for (int j = 0; j < y.number; j++)

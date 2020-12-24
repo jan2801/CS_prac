@@ -115,18 +115,19 @@ namespace Lab1
 
                 Console.WriteLine("TASK №3");
 
-                Console.WriteLine("RMin for vector2(21, 3):\n");
+                Console.WriteLine("Minimal distance from V3MainCollection points to vector2(21, 3):\n");
                 Console.WriteLine($"{v.RMin(new Vector2(21, 3))}\n");
 
-                Console.WriteLine("RMinDataItem for vecor2(21, 3):\n");
+                Console.WriteLine("DataItem and its field in minimal distance for vector2(21, 3):\n");
                 Console.WriteLine($"\n{v.RMinDataItem(new Vector2(21, 3))}\n");
 
 
-                Console.WriteLine("Except on Grid:");
+                Console.WriteLine("There are vector2 objects, which is in V3DataCollection, but not in V3DataOnGrid:\n");
                 var gr_ex = v.ExGrid;
+                
                 foreach (Vector2 vec in gr_ex)
                 {
-                    Console.WriteLine(vec);
+                    Console.WriteLine($"coordinates {vec} \n");
                 }
 
 
