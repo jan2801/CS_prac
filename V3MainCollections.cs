@@ -3,16 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.ComponentModel;
 
 
 namespace Lab1
 {
+
+    
+
+    enum ChangeInfo { ItemChanged, Add, Remove, Replace };
+
+    delegate void DataChangedEventHandler(object source, DataChangedEventArgs args);
     class V3MainCollection: IEnumerable<V3Data>
     {
+
         List<V3Data> v3 = new List<V3Data>();
 
-        public int Count
+        public event DataChangedEventHandler DataChanged;
+
+        private void PropertyChangedEventHandler(object ob, PropertyChangedEventArgs args)
         {
+            
+            DataChanged(ob, new DataChangedEventArgs(ChangeInfo.ItemChanged, $"Property was changed"));
+        }
+        public int Count
+
+        
+        {
+            set { }
             get { return v3.Count; }
         }
 
@@ -46,7 +64,11 @@ namespace Lab1
 
         public void Add(V3Data m)
         {
+            int c = v3.Count();
             v3.Add(m);
+
+            m.PropertyChanged += PropertyChangedEventHandler;
+            DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
         }
 
         private V3DataCollection v3_b(V3Data elem)
@@ -54,18 +76,54 @@ namespace Lab1
             return elem is V3DataOnGrid ? (V3DataCollection) (elem as V3DataOnGrid) : elem as V3DataCollection;
         }
 
+        public V3Data this[int index]
+        {
+            get
+            {
+                if (v3.Count < index)
+                    throw new IndexOutOfRangeException();
+
+
+                return v3[index];
+            }
+       
+            set
+            {
+                v3[index] = value;
+                if (DataChanged != null)
+                {
+                    DataChangedEventArgs d = new DataChangedEventArgs(ChangeInfo.Replace, $". Element {index} replace happened.\n");
+                    DataChanged(this, d);
+                }
+            }
+        }
+
 
         public bool Remove(string id, DateTime date)
         {
             bool k = false;
+            int c = v3.Count();
+            
             foreach (V3Data el in v3.ToList())
             {
                 if (el.meas_ident == id && el.d_time == date)
                 {
+                    el.PropertyChanged -= PropertyChangedEventHandler;
+                }
+            }
+            
+            foreach (V3Data el in v3.ToList())
+            {
+                if (el.meas_ident == id && el.d_time == date)
+                {
+                    
                     v3.Remove(el);
+                    
+                    DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $". Element was removed, it was {c} elements, but now {Count} elements.\n"));
                     k = true;
                 }
             }
+            
             return k;
         }
 
@@ -81,7 +139,16 @@ namespace Lab1
 
         public float RMin (Vector2 v)
         {
-            return v3.Select(v3_b).Where(vec => vec.lst_d.Count() > 0).Select(vec => vec.Nearest(v)).Select(vec => Vector2.Distance(vec.First(), v)).Min();
+
+            
+
+            var q1 = v3.Select(v3_b);
+            var q2 = from d in q1 from vector in d select vector;
+
+  
+
+            DataItem min = q2.OrderBy(item => Vector2.Distance(item.coor, v)).First();
+            return Vector2.Distance(min.coor, v);
 
             //выбираем минимум
         }

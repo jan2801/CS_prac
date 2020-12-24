@@ -1,6 +1,7 @@
 using System;
 
 using System.Numerics;
+using System.ComponentModel;
 
 
 namespace Lab1
@@ -8,14 +9,52 @@ namespace Lab1
     abstract class V3Data
     {
 
-        public string meas_ident{ get; set; }
+        public string meas_ident;
 
-        public DateTime d_time { get; set; }
+        public DateTime d_time;
+
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        protected void OnPropertyChanged(string pn)
+        {
+            
+            PropertyChanged(this, new PropertyChangedEventArgs(pn));
+        }
+
 
         public V3Data(string id, DateTime t)
         {
             meas_ident = id;
             d_time = t;
+        }
+
+        public string measure
+        {
+            get
+            {
+                return meas_ident;
+            }
+            set
+            {
+                meas_ident = value;
+                OnPropertyChanged("measure was changed");
+            }
+        }
+
+        public DateTime date
+        {
+            get
+            {
+                return d_time;
+            }
+            set
+            {
+                d_time = value;
+                OnPropertyChanged("date or time was changed");
+            }
         }
 
         public abstract string ToLongString();
