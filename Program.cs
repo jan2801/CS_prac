@@ -54,16 +54,20 @@ namespace Lab1
         }
     }
 
+    
+
 
     class Program
     {
+
+            static void DataChangedEventHandler(object source, DataChangedEventArgs args)
+            {
+                Console.WriteLine($"Data change happened {args}\n");
+            }
             public static int Main()
             { 
 
-                static void DataChangedEventHandler(object source, DataChangedEventArgs args)
-                {
-                    Console.WriteLine($"Data change happened {args}\n");
-                }
+                
 
         
                 
