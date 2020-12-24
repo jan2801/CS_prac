@@ -18,12 +18,7 @@ namespace Lab1
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        protected void OnPropertyChanged(string pn)
-        {
-            
-            PropertyChanged(this, new PropertyChangedEventArgs(pn));
-        }
-
+        
 
         public V3Data(string id, DateTime t)
         {
@@ -40,7 +35,7 @@ namespace Lab1
             set
             {
                 meas_ident = value;
-                OnPropertyChanged("measure was changed");
+                PropertyChanged(this, new PropertyChangedEventArgs("measure was changed"));
             }
         }
 
@@ -53,7 +48,7 @@ namespace Lab1
             set
             {
                 d_time = value;
-                OnPropertyChanged("date or time was changed");
+                PropertyChanged(this, new PropertyChangedEventArgs("date was changed"));
             }
         }
 
