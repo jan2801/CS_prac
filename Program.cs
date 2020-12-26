@@ -85,11 +85,11 @@ namespace Lab1
                
                 d_gr.measure = "my measure"; 
                 V3DataCollection d_c = d_gr;
-                Console.WriteLine(d_gr.ToLongString());
+             //   Console.WriteLine(d_gr.ToLongString());
                 
 
                 V3MainCollection v = new V3MainCollection();
-                v.DataChanged += DataChangedEventHandler;
+             //   v.DataChanged += DataChangedEventHandler;
                 
                 v.Add(new V3DataCollection("new_one", new DateTime()));
                 v.Add(new V3DataCollection("new one 2", DateTime.Now)); //add

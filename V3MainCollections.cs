@@ -23,8 +23,8 @@ namespace Lab1
 
         private void PropertyChangedEventHandler(object ob, PropertyChangedEventArgs args)
         {
-            
-            DataChanged(ob, new DataChangedEventArgs(ChangeInfo.ItemChanged, $"Property was changed"));
+            if (DataChanged != null)
+                DataChanged(ob, new DataChangedEventArgs(ChangeInfo.ItemChanged, $"Property was changed"));
         }
         public int Count
 
@@ -68,7 +68,8 @@ namespace Lab1
             v3.Add(m);
 
             m.PropertyChanged += PropertyChangedEventHandler;
-            DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
+            if (DataChanged != null)
+                DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
         }
 
         private V3DataCollection v3_b(V3Data elem)
@@ -118,8 +119,8 @@ namespace Lab1
                 {
                     
                     v3.Remove(el);
-                    
-                    DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $". Element was removed, it was {c} elements, but now {Count} elements.\n"));
+                    if (DataChanged != null)
+                        DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $". Element was removed, it was {c} elements, but now {Count} elements.\n"));
                     k = true;
                 }
             }
