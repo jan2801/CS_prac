@@ -28,8 +28,9 @@ namespace WpfApp
 
             InitializeComponent();
 
-            V3MainCollection Collection = new V3MainCollection();
-            this.DataContext = Collection;
+            //V3MainCollection MainCollection = new V3MainCollection();
+            this.DataContext = MainCollection;
+            lisBox_Main.ItemsSource = MainCollection;
 
         }
 

@@ -58,6 +58,12 @@ namespace ClassLibrary
             if (DataChanged != null)
                 DataChanged(ob, new DataChangedEventArgs(ChangeInfo.ItemChanged, $"Property was changed"));
         }
+
+        public void CollectionChangedEvent(object ob, NotifyCollectionChangedEventArgs args)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(ob, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
         public int Count
         {
             set { }
@@ -66,7 +72,7 @@ namespace ClassLibrary
 
         public V3MainCollection()
         {
-            //CollectionChanged += CollectionChangedHandler;
+            //CollectionChanged += CollectionChangedEventHandler;
         }
 
         private void CollectionChangedHandler()
@@ -129,6 +135,7 @@ namespace ClassLibrary
             m.PropertyChanged += PropertyChangedEventHandler;
             if (DataChanged != null)
                 DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
+            
         }
 
         private V3DataCollection v3_b(V3Data elem)
@@ -335,6 +342,7 @@ namespace ClassLibrary
 
             v3.Add(new V3DataCollection(defstr, date1));
             v3.Add(new V3DataOnGrid("", new DateTime(), new Grid1D(0, 0), new Grid1D(0, 0)));
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         }
     }
