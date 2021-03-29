@@ -38,9 +38,9 @@ namespace ClassLibrary
         {
             void GetObjectData(SerializationInfo info, StreamingContext context);
         }
-       
 
-        
+        private string max_fromzero = "0";
+
 
         List<V3Data> v3 = new List<V3Data>();
         
@@ -55,6 +55,7 @@ namespace ClassLibrary
 
         private void PropertyChangedEventHandler(object ob, PropertyChangedEventArgs args)
         {
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             if (DataChanged != null)
                 DataChanged(ob, new DataChangedEventArgs(ChangeInfo.ItemChanged, $"Property was changed"));
         }
@@ -70,15 +71,36 @@ namespace ClassLibrary
             get { return v3.Count; }
         }
 
+        public string FromZeroToPoint
+        {
+            get
+            {
+                return max_fromzero;
+            }
+            set
+            {
+                max_fromzero = value;
+                PropertyChangedEventArgs md = new PropertyChangedEventArgs("This is the max distence from zero");
+                PropertyChangedEvent?.Invoke(this, md);
+            }
+        }
+        private void CollectionChangedHandler(object source, NotifyCollectionChangedEventArgs args)
+        {
+            changes = true;
+
+            //q1 = from 
+            
+            //max_fromzero = 
+
+
+        }
+
         public V3MainCollection()
         {
-            //CollectionChanged += CollectionChangedEventHandler;
+            CollectionChanged += CollectionChangedHandler;
         }
 
-        private void CollectionChangedHandler()
-        {
-
-        }
+        
 
         public IEnumerator<V3Data> GetEnumerator()
         {
@@ -135,6 +157,7 @@ namespace ClassLibrary
             m.PropertyChanged += PropertyChangedEventHandler;
             if (DataChanged != null)
                 DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             
         }
 
@@ -162,7 +185,10 @@ namespace ClassLibrary
                     DataChangedEventArgs d = new DataChangedEventArgs(ChangeInfo.Replace, $". Element {index} replace happened.\n");
                     DataChanged(this, d);
                 }
+                CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
+
+            
         }
 
 
@@ -190,9 +216,13 @@ namespace ClassLibrary
                     k = true;
                 }
             }
-            
+
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
             return k;
         }
+
+
 
         public override string ToString()
         {
@@ -247,6 +277,7 @@ namespace ClassLibrary
                 if (f != null)
                     f.Close();
             }
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         }
         

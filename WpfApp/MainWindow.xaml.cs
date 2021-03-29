@@ -34,7 +34,10 @@ namespace WpfApp
 
         }
 
-       
+        private void DataOnGrid_filter(object sender, FilterEventArgs args)
+        {
+            args.Accepted = args.Item is V3DataOnGrid;
+        }
 
         private void NewClick(object sender, RoutedEventArgs e)
         {
@@ -115,6 +118,14 @@ namespace WpfApp
 
         }
 
+
+        private void DataCollection_filter(object sender, FilterEventArgs args)
+        {
+            args.Accepted = args.Item is V3DataCollection;
+        }
+
+        
+
         private void AddDefaultClickV3DataOnGrid(object sender, RoutedEventArgs e)
         {
             V3DataOnGrid default_data_on_grid = new V3DataOnGrid("default data on grid", DateTime.Now, new Grid1D(20, 6), new Grid1D(20, 6));
@@ -141,9 +152,20 @@ namespace WpfApp
             }
         }
 
+        
+
         private void RemoveElement(object sender, RoutedEventArgs e)
         {
-            //ListBox.Items.Remove(comboBox1.SelectedItem); 
+            if (lisBox_Main.SelectedItem is V3Data selected)
+            {
+                MessageBox.Show("Item will be removed");
+                MainCollection.Remove(selected.measure, selected.date);
+            }
         }
+
+        
+
+
+        
     }
 }

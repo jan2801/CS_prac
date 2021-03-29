@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closed="WindowClosed">
+    <Window.Resources>
+        <CollectionViewSource Source="{Binding}" x:Key="LisBox_DataCollection_source" Filter="DataCollection_filter"/>
+        <CollectionViewSource Source="{Binding}" x:Key="ListBox_DataOnGrid_View" Filter="DataOnGrid_filter"/>
+
+        
+
+    </Window.Resources>
     <Grid Height="434" VerticalAlignment="Center" HorizontalAlignment="Right" Width="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="48*"/>
@@ -30,16 +37,21 @@
                 <MenuItem Header="Remove" Click="RemoveElement"/>
             </MenuItem>
         </Menu>
+
+
+        <ListBox Grid.Row="1" Name ="lisBox_Main" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="267,29,262,0" />
+        <TextBlock Grid.Row="1" Margin="267,0,262,0">V3MainCollection all elements</TextBlock>
+
+
         
-            
-        <ListBox Grid.Row="1" Name ="lisBox_Main" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="267,0,262,0" />
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin="267,0,262,0">V3MainCollection all elements</TextBlock>
-
-
-
-        <ListBox Name ="lisBox_DataCollection" Margin="533,0,0,0" Grid.Row="2" />
+        <ListBox Name ="lisBox_DataCollection" Margin="543,39,0,0" Grid.Row="2" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
+        <TextBlock Grid.Row="2"  Margin="543,0,0,183" RenderTransformOrigin="0.506,0.702">Some V3DataCollection elements</TextBlock>
+        
         <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_DataOnGrid" Margin="0,0,533,0"/>
-        <TextBlock Grid.Row="2" Text="TextBlock" TextWrapping="Wrap" Margin="267,0,262,0"/>
+        
+        <TextBlock Grid.Row="2" Text="The biggest distance from zero to points" TextWrapping="Wrap" Margin="267,0,262,0"/>
+       
+        
         <ListBox Grid.Row="2" Name = "lisBox_details" Margin="538,0,0,0"/>
 
 
