@@ -92,9 +92,7 @@ namespace ClassLibrary
         {
             changes = true;
 
-            //q1 = from 
             
-            //max_fromzero = 
 
 
         }
