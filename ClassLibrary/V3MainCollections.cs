@@ -23,11 +23,12 @@ namespace ClassLibrary
 
 
     [Serializable]
-    public class V3MainCollection : IEnumerable<V3Data>, INotifyCollectionChanged
+    public class V3MainCollection : IEnumerable<V3Data>, INotifyCollectionChanged, INotifyPropertyChanged
     {
 
         private bool changes = false;
 
+        
         
         private void V3MainCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -51,9 +52,12 @@ namespace ClassLibrary
         [field: NonSerialized]
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        public event PropertyChangedEventHandler PropertyChangedEvent;
+      
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void PropertyChangedEventHandler(object ob, PropertyChangedEventArgs args)
+
+
+        private void PropertyChangedHandler(object ob, PropertyChangedEventArgs args)
         {
             CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             if (DataChanged != null)
@@ -81,7 +85,7 @@ namespace ClassLibrary
             {
                 max_fromzero = value;
                 PropertyChangedEventArgs md = new PropertyChangedEventArgs("This is the max distence from zero");
-                PropertyChangedEvent?.Invoke(this, md);
+                PropertyChanged?.Invoke(this, md);
             }
         }
         private void CollectionChangedHandler(object source, NotifyCollectionChangedEventArgs args)
@@ -122,7 +126,7 @@ namespace ClassLibrary
             {
                 changes = value;
                 PropertyChangedEventArgs pc = new PropertyChangedEventArgs("Changes were made");
-                PropertyChangedEvent?.Invoke(this, pc);
+                PropertyChanged?.Invoke(this, pc);
             }
         }
 
@@ -154,10 +158,13 @@ namespace ClassLibrary
             int c = v3.Count();
             v3.Add(m);
 
-            m.PropertyChanged += PropertyChangedEventHandler;
+            m.PropertyChanged += PropertyChangedHandler;
             if (DataChanged != null)
                 DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
             CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("Collection was changed"));
+
             
         }
 
@@ -201,7 +208,7 @@ namespace ClassLibrary
             {
                 if (el.measure == id && el.date == date)
                 {
-                    el.PropertyChanged -= PropertyChangedEventHandler;
+                    el.PropertyChanged -= PropertyChangedHandler;
                 }
             }
             

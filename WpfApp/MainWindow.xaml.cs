@@ -34,14 +34,22 @@ namespace WpfApp
 
         }
 
+
+
         private void DataOnGrid_filter(object sender, FilterEventArgs args)
         {
-            args.Accepted = args.Item is V3DataOnGrid;
-        }
+            var i = args.Item;
+            if (i.GetType() == typeof(V3DataOnGrid))
+                args.Accepted = true;
+            else
+                args.Accepted = false;
+        } 
 
         private void NewClick(object sender, RoutedEventArgs e)
         {
             MainCollection = new V3MainCollection();
+            DataContext = MainCollection;
+            lisBox_Main.ItemsSource = (IEnumerable<V3Data>)DataContext;
             MessageBox.Show("New v3 main collection was created");
         }
 
@@ -121,9 +129,14 @@ namespace WpfApp
 
         private void DataCollection_filter(object sender, FilterEventArgs args)
         {
-            args.Accepted = args.Item is V3DataCollection;
+            var i = args.Item;
+            if (i.GetType() == typeof(V3DataCollection))
+                args.Accepted = true;
+            else
+                args.Accepted = false;
         }
-
+    
+       
         
 
         private void AddDefaultClickV3DataOnGrid(object sender, RoutedEventArgs e)
