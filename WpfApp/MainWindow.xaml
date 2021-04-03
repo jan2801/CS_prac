@@ -11,10 +11,13 @@
         <CollectionViewSource Source="{Binding}" x:Key="LisBox_DataOnGrid_source" Filter="DataOnGrid_filter"/>
 
         <local:DetailsConverter1 x:Key="DetailsConverter1"/>
+        <local:DetailsConverter2 x:Key="DetailsConverter2"/>
+        
 
         <DataTemplate x:Key="LisBox_details">
             <StackPanel>
                 <TextBlock Text="{Binding Path=values, Converter={StaticResource DetailsConverter1}}"/>
+                <TextBlock Text="{Binding Path=values, Converter={StaticResource DetailsConverter2}}"/>
                
             </StackPanel>
         </DataTemplate>

@@ -26,9 +26,27 @@ namespace WpfApp
 
       
     }
-   /* class DetailsConverter2 : IValueConverter
-    {
-       
 
-    }*/
+    class DetailsConverter2 : IValueConverter
+    {
+        public object Convert(object val, Type tt, object par, CultureInfo cul)
+        {
+            double v = (double)val;
+            return $"Value is {v}";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+            throw new NotImplementedException();
+
+        }
+
+
+    }
+    /* class DetailsConverter2 : IValueConverter
+     {
+
+
+     }*/
 }
