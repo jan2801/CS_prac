@@ -47,6 +47,15 @@ namespace WpfApp
 
         private void NewClick(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Changes are not saved");
+            if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                SaveChanges();
+
+
+                MessageBox.Show("Changes were saved");
+            }
+ 
             MainCollection = new V3MainCollection();
             DataContext = MainCollection;
             lisBox_Main.ItemsSource = (IEnumerable<V3Data>)DataContext;
@@ -95,7 +104,7 @@ namespace WpfApp
             {
                 MainCollection = new V3MainCollection();
                 MainCollection.Load(dlg.FileName);
-                //code here
+                DataContext = MainCollection;
             }
         }
 
@@ -106,8 +115,15 @@ namespace WpfApp
 
         private void WindowClosed(object sender, EventArgs e)
         {
-            SaveChanges();
-            
+            MessageBox.Show("Changes are not saved");
+            if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                SaveChanges();
+
+
+                MessageBox.Show("Changes were saved");
+            }
+
 
             MessageBox.Show("Main Window is closed");
         }

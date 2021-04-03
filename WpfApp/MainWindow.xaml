@@ -12,12 +12,14 @@
 
         <local:DetailsConverter1 x:Key="DetailsConverter1"/>
         <local:DetailsConverter2 x:Key="DetailsConverter2"/>
+        <local:DetailsConverter3 x:Key="DetailsConverter3"/>
+        <local:DetailsConverter4 x:Key="DetailsConverter4"/>
         
 
         <DataTemplate x:Key="LisBox_details">
             <StackPanel>
-                <TextBlock Text="{Binding Path=values, Converter={StaticResource DetailsConverter1}}"/>
-                <TextBlock Text="{Binding Path=values, Converter={StaticResource DetailsConverter2}}"/>
+                <TextBlock Text="{Binding Path=coor, Converter={StaticResource DetailsConverter1}}"/>
+                <TextBlock Text="{Binding Path=electro_m_field, Converter={StaticResource DetailsConverter2}}"/>
                
             </StackPanel>
         </DataTemplate>
@@ -27,21 +29,23 @@
     </Window.Resources>
     <Grid Height="434" VerticalAlignment="Center" HorizontalAlignment="Right" Width="800">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48*"/>
-            <RowDefinition Height="169"/>
-            <RowDefinition Height="217*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.RowSpan="1" Margin="39,0,0,0">
-            <MenuItem Header="File" Height="44" Width="137" RenderTransformOrigin="0.427,0.572">
+        <Menu Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">
+            <MenuItem Header="File" Height="auto" Width="auto" >
                 <MenuItem Header="New" Click="NewClick"/>
                 <MenuItem Header="Open" Click="OpenClick"/>
                 <MenuItem Header="Save" Click="SaveClick"/>
             </MenuItem>
 
-            <MenuItem Header="Edit" Width="131" Height="49" RenderTransformOrigin="0.502,0.521">
+            <MenuItem Header="Edit" Width="auto" Height="auto" >
                 <MenuItem Header="Add Defaults" Click="AddDefaultsClick"/>
                 <MenuItem Header="Add Default V3DataCollection" Click = "AddDefaultClickV3DataCollection"/>
                 <MenuItem Header="Add Default V3DataOnGrid" Click="AddDefaultClickV3DataOnGrid"/>
@@ -51,20 +55,26 @@
         </Menu>
 
 
-        <ListBox Grid.Row="1" Name ="lisBox_Main" ItemsSource="{Binding}" Margin="267,29,262,0" />
+        <ListBox Grid.Row="1" Grid.Column="1" Name ="lisBox_Main" ItemsSource="{Binding}"  />
         
 
 
         
-        <ListBox Name ="lisBox_DataCollection" Margin="543,39,0,0" Grid.Row="2" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
+        <ListBox Name ="lisBox_DataCollection"  Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
  
         
-        <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_DataOnGrid" Margin="0,0,533,0" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
+        <ListBox  Grid.Row="1" Grid.Column="2" Name ="lisBox_DataOnGrid" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
 
-        <ListBox Grid.Row="1" Grid.Column="2" Name ="lisBox_details" Margin="0,0,533,0"
+        <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
                  ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}, Path=lst_d}"
                  IsSynchronizedWithCurrentItem="True"
                  ItemTemplate="{StaticResource LisBox_details}"/>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter3}}"/>
+            <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter4}}"/>
+
+        </StackPanel>
+        
 
 
 

@@ -7,8 +7,17 @@ namespace ClassLibrary
 {
     public class DataItem
     {
-        public System.Numerics.Vector2 coor;
-        public double electro_m_field;
+        public System.Numerics.Vector2 coor
+        {
+            get;
+            set;
+
+        }
+        public double electro_m_field
+        {
+            get;
+            set;
+        }
 
         public DataItem(System.Numerics.Vector2 vec, double field)
         {
