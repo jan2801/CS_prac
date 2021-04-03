@@ -13,8 +13,8 @@ namespace WpfApp
     {
         public object Convert(object val, Type tt, object par, CultureInfo cul)
         {
-           /* double[,] coords = (double[,]) val; */
-            return $"Coord is  "; 
+            double[,] coords = (double[,]) val; 
+            return $"Coord is {coords}"; 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
