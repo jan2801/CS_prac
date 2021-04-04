@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
 
+
 namespace ClassLibrary
 {
 
@@ -40,7 +41,7 @@ namespace ClassLibrary
             void GetObjectData(SerializationInfo info, StreamingContext context);
         }
 
-        private string max_fromzero = "0";
+    
 
 
         List<V3Data> v3 = new List<V3Data>();
@@ -75,18 +76,31 @@ namespace ClassLibrary
             get { return v3.Count; }
         }
 
-        public string FromZeroToPoint
+        public double FromZeroToPoint
         {
             get
             {
-                return max_fromzero;
+                var query1 = (from elem in (from item in this.v3
+                                          where item is V3DataCollection
+                                          select (V3DataCollection)item)
+                            from dti in elem
+                            select (double)dti.coor.Length());
+                var query2 = (from elem in (from item in this.v3
+                                            where item is V3DataOnGrid
+                                            select (V3DataOnGrid)item)
+                              select (Math.Sqrt(Math.Pow((elem.x.step * elem.x.number), 2) + Math.Pow((elem.y.step * elem.y.number), 2))));
+
+                return query1.Concat(query2).Max();
+
+              /*  List<double> val_distance = new List<double>();
+                foreach (var elem in query2)
+                {
+
+                    val_distance.Add(elem);
+                }
+              */
             }
-            set
-            {
-                max_fromzero = value;
-                PropertyChangedEventArgs md = new PropertyChangedEventArgs("This is the max distence from zero");
-                PropertyChanged?.Invoke(this, md);
-            }
+           
         }
         private void CollectionChangedHandler(object source, NotifyCollectionChangedEventArgs args)
         {
@@ -314,6 +328,10 @@ namespace ClassLibrary
         }
 
         
+  
+
+
+
 
 
         public string ToLongString(string format)

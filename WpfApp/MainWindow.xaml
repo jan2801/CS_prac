@@ -61,8 +61,8 @@
 
         
         <ListBox Name ="lisBox_DataCollection"  Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
- 
-        
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=FromZeroToPoint, UpdateSourceTrigger=PropertyChanged}"/>
         <ListBox  Grid.Row="1" Grid.Column="2" Name ="lisBox_DataOnGrid" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
 
         <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
@@ -75,6 +75,7 @@
 
         </StackPanel>
         
+
 
 
 
