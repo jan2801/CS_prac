@@ -44,7 +44,7 @@ namespace ClassLibrary
     
 
 
-        List<V3Data> v3 = new List<V3Data>();
+        public List<V3Data> v3 = new List<V3Data>();
         
 
         [field: NonSerialized]
@@ -53,7 +53,7 @@ namespace ClassLibrary
         [field: NonSerialized]
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-      
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -68,39 +68,39 @@ namespace ClassLibrary
         public void CollectionChangedEvent(object ob, NotifyCollectionChangedEventArgs args)
         {
             if (CollectionChanged != null)
-                CollectionChanged(ob, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
         public int Count
         {
             set { }
             get { return v3.Count; }
         }
-
+    
         public double FromZeroToPoint
         {
             get
             {
-                var query1 = (from elem in (from item in this.v3
-                                          where item is V3DataCollection
-                                          select (V3DataCollection)item)
-                            from dti in elem
-                            select (double)dti.coor.Length());
-                var query2 = (from elem in (from item in this.v3
-                                            where item is V3DataOnGrid
-                                            select (V3DataOnGrid)item)
-                              select (Math.Sqrt(Math.Pow((elem.x.step * elem.x.number), 2) + Math.Pow((elem.y.step * elem.y.number), 2))));
-
-                return query1.Concat(query2).Max();
-
-              /*  List<double> val_distance = new List<double>();
-                foreach (var elem in query2)
+                if (this.Count > 0)
                 {
-
-                    val_distance.Add(elem);
+                    var query1 = (from elem in (from item in this.v3
+                                              where item is V3DataCollection
+                                              select (V3DataCollection)item)
+                                from dti in elem
+                                select (double)dti.coor.Length());
+                    var query2 = (from elem in (from item in this.v3
+                                                where item is V3DataOnGrid
+                                                select (V3DataOnGrid)item)
+                                  select (Math.Sqrt(Math.Pow((elem.x.step * elem.x.number), 2) + Math.Pow((elem.y.step * elem.y.number), 2))));
+                    return query1.Concat(query2).Max();
+                    
+                    
                 }
-              */
+                return 0;
+               
+             
             }
-           
+            
+
         }
         private void CollectionChangedHandler(object source, NotifyCollectionChangedEventArgs args)
         {
@@ -170,7 +170,7 @@ namespace ClassLibrary
             int c = v3.Count();
             v3.Add(m);
 
-            m.PropertyChanged += PropertyChangedHandler;
+            //m.PropertyChanged += PropertyChangedHandler;
             if (DataChanged != null)
                 DataChanged(this, new DataChangedEventArgs(ChangeInfo.Add, $". New elemenent was added, it was {c} elements, but now {Count} elements.\n"));
             CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -215,26 +215,32 @@ namespace ClassLibrary
         {
             bool k = false;
             int c = v3.Count();
+            V3Data ell = null;
             
-            foreach (V3Data el in v3.ToList())
+            foreach (V3Data el in v3)
             {
-                if (el.measure == id && el.date == date)
-                {
-                    el.PropertyChanged -= PropertyChangedHandler;
-                }
+                //if (el != null)
+                    if (el.measure == id && el.date == date)
+                    {
+                        el.PropertyChanged -= PropertyChangedHandler;
+                    }
             }
             
-            foreach (V3Data el in v3.ToList())
+            foreach (V3Data el in v3)
             {
-                if (el.measure == id && el.date == date)
-                {
-                    
-                    v3.Remove(el);
-                    if (DataChanged != null)
-                        DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $". Element was removed, it was {c} elements, but now {Count} elements.\n"));
-                    k = true;
-                }
+                //if (el != null)
+                    if (el.measure == id && el.date == date)
+                    {
+
+                        ell = el;
+                        
+                        if (DataChanged != null)
+                            DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $". Element was removed, it was {c} elements, but now {Count} elements.\n"));
+                        k = true;
+                    }
             }
+            if (ell != null)
+                v3.Remove(ell);
 
             CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
@@ -262,13 +268,14 @@ namespace ClassLibrary
                 f = new FileStream(filename, FileMode.OpenOrCreate);
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(f, v3);
+                changes = false;
 
             }
 
-            catch (Exception e)
+            /*catch (Exception e)
             {
                 Console.WriteLine($"Exception with {e.Message} was cathed");
-            }
+            } */
             finally
             {
                 if (f != null)
@@ -285,18 +292,21 @@ namespace ClassLibrary
                 f = File.OpenRead(filename);
                 BinaryFormatter formatter = new BinaryFormatter();
                 List<V3Data>  des_data = (List<V3Data>)formatter.Deserialize(f);
+                v3 = des_data;
             }
 
             catch (Exception e)
             {
                 Console.WriteLine($"Exception with {e.Message} was cathed");
-            }
+                throw;
+            } 
             finally
             {
                 if (f != null)
                     f.Close();
+                CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
-            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            
 
         }
         
@@ -378,9 +388,9 @@ namespace ClassLibrary
 
             V3DataCollection d_grrrrr = new V3DataCollection(s2, date1);
             d_grrrrr.InitRandom(50, 130.0F, 132.0F, 0.0, 200.0);
-            v3.Add(d_grr);
-            v3.Add(d_grr1);
-            v3.Add(d_grrrrr);
+            this.Add(d_grr);
+            this.Add(d_grr1);
+            this.Add(d_grrrrr);
 
 
             // V3DataOnGrid
@@ -388,14 +398,14 @@ namespace ClassLibrary
         
   
             // V3DataCollection
-            v3.Add((V3DataCollection)(v3[0] as V3DataOnGrid));
+            this.Add((V3DataCollection)(v3[0] as V3DataOnGrid));
 
    
            
 
 
-            v3.Add(new V3DataCollection(defstr, date1));
-            v3.Add(new V3DataOnGrid("", new DateTime(), new Grid1D(0, 0), new Grid1D(0, 0)));
+            this.Add(new V3DataCollection(defstr, date1));
+            this.Add(new V3DataOnGrid("", new DateTime(), new Grid1D(0, 0), new Grid1D(0, 0)));
             CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         }

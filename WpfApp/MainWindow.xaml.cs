@@ -39,38 +39,57 @@ namespace WpfApp
         private void DataOnGrid_filter(object sender, FilterEventArgs args)
         {
             var i = args.Item;
-            if (i.GetType() == typeof(V3DataOnGrid))
-                args.Accepted = true;
-            else
-                args.Accepted = false;
+            if (i != null)
+            {
+                
+                if (i.GetType() == typeof(V3DataOnGrid))
+                    args.Accepted = true;
+                else
+                    args.Accepted = false;
+            }
         } 
 
         private void NewClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Changes are not saved");
-            if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (Changes_Detected())
             {
-                SaveChanges();
+                if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    SaveChanges();
 
 
-                MessageBox.Show("Changes were saved");
+                    MessageBox.Show("Changes were saved");
+                }
+
+                MainCollection = new V3MainCollection();
+                DataContext = MainCollection;
+                lisBox_Main.ItemsSource = (IEnumerable<V3Data>)DataContext;
+                MessageBox.Show("New v3 main collection was created");
             }
- 
-            MainCollection = new V3MainCollection();
-            DataContext = MainCollection;
-            lisBox_Main.ItemsSource = (IEnumerable<V3Data>)DataContext;
-            MessageBox.Show("New v3 main collection was created");
         }
 
         public void SaveChanges()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
 
-            dlg.Filter = "(*.txt) | *.txt | All files(*.*) | *.*";
-            dlg.FilterIndex = 2;
+                dlg.Filter = "(*.txt) | *.txt | All files(*.*) | *.*";
+                dlg.FilterIndex = 2;
 
-            if ((dlg.ShowDialog() == true) && (MainCollection != null))
-                MainCollection.Save(dlg.FileName);
+                if ((dlg.ShowDialog() == true) && (MainCollection != null))
+                {
+                    MainCollection.Save(dlg.FileName);
+                    
+                }
+                    
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show("SaveChanges() error\n" + ex.Message);
+            }
+            
         }
 
         private bool Changes_Detected()
@@ -82,30 +101,40 @@ namespace WpfApp
 
         private void OpenClick(object sender, RoutedEventArgs e)
         {
-            if (Changes_Detected())
+            try
             {
-                MessageBox.Show("Changes are not saved");
-                if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (Changes_Detected())
                 {
-                    SaveChanges();
+                    MessageBox.Show("Changes are not saved");
+                    if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        SaveChanges();
 
 
-                    MessageBox.Show("Changes were saved");
+                        MessageBox.Show("Changes were saved");
+                    }
+
                 }
 
+                OpenFileDialog dlg = new OpenFileDialog();
+
+                dlg.Filter = "(*.txt) | *.txt | All files(*.*) | *.*";
+                dlg.FilterIndex = 2;
+
+                if (dlg.ShowDialog() == true)
+                {
+                    MainCollection = new V3MainCollection();
+                    MainCollection.Load(dlg.FileName);
+                    DataContext = MainCollection;
+                    this.lisBox_Main.ItemsSource = MainCollection;
+                }
             }
-
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            dlg.Filter = "(*.txt) | *.txt | All files(*.*) | *.*";
-            dlg.FilterIndex = 2;
-
-            if (dlg.ShowDialog() == true)
+            catch (Exception ex)
             {
-                MainCollection = new V3MainCollection();
-                MainCollection.Load(dlg.FileName);
-                DataContext = MainCollection;
+                Console.WriteLine($"Exception with {ex.Message} was cathed");
+                MessageBox.Show("Exception was catched");
             }
+
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
@@ -146,10 +175,13 @@ namespace WpfApp
         private void DataCollection_filter(object sender, FilterEventArgs args)
         {
             var i = args.Item;
-            if (i.GetType() == typeof(V3DataCollection))
-                args.Accepted = true;
-            else
-                args.Accepted = false;
+            if (i != null)
+            {
+                if (i.GetType() == typeof(V3DataCollection))
+                    args.Accepted = true;
+                else
+                    args.Accepted = false;
+            }
         }
     
        
@@ -165,7 +197,7 @@ namespace WpfApp
 
         private void AddV3DataOnGridFromFile(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dlg = new SaveFileDialog();
+            OpenFileDialog dlg = new OpenFileDialog();
 
             dlg.Filter = "(*.txt) | *.txt | All files(*.*) | *.*";
             dlg.FilterIndex = 2;
@@ -185,6 +217,7 @@ namespace WpfApp
 
         private void RemoveElement(object sender, RoutedEventArgs e)
         {
+            
             if (lisBox_Main.SelectedItem is V3Data selected)
             {
                 MessageBox.Show("Item will be removed");
@@ -192,9 +225,9 @@ namespace WpfApp
             }
         }
 
-        
+        private void lisBox_Main_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-
-        
+        }
     }
 }

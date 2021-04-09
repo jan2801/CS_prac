@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Globalization;
-
+using System.Runtime.Serialization;
 using System.IO;
 
 
@@ -12,7 +12,8 @@ namespace ClassLibrary
 {
 
 
-
+    [Serializable]
+    [KnownType(typeof(Grid1D))]
     public class V3DataOnGrid: V3Data, IEnumerable<DataItem>
     {
         public Grid1D x { get; set; }
@@ -122,23 +123,29 @@ namespace ClassLibrary
                     values[i, j] = f;
                 }
         }
+    
 
         public static implicit operator V3DataCollection(V3DataOnGrid v)
         {
-            V3DataCollection col = new V3DataCollection(v.measure, v.date);
-            Vector2 c;
-            double elfield;
-            for (int i = 0; i < v.x.number; i++)
-                for (int j = 0; j < v.y.number; j++)
-                {
-                    c.X = v.x.step * i;c.Y = v.y.step * j;
+            if (v != null)
+            {
+                V3DataCollection col = new V3DataCollection(v.measure, v.date);
+
+                Vector2 c;
+                double elfield;
+                for (int i = 0; i < v.x.number; i++)
+                    for (int j = 0; j < v.y.number; j++)
+                    {
+                        c.X = v.x.step * i; c.Y = v.y.step * j;
 
 
-                    elfield = v.values[i, j];
+                        elfield = v.values[i, j];
 
-                    col.lst_d.Add(new DataItem(c, elfield));
-                }
-            return col;
+                        col.lst_d.Add(new DataItem(c, elfield));
+                    }
+                return col;
+            }
+            return null;
         }
 
         public override Vector2[] Nearest(Vector2 v)

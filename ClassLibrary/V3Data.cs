@@ -2,10 +2,12 @@ using System;
 
 using System.Numerics;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 
 namespace ClassLibrary
 {
+    [Serializable]
     public abstract class V3Data: INotifyPropertyChanged
     {
 
@@ -14,7 +16,7 @@ namespace ClassLibrary
         private DateTime d_time;
 
         
-
+        [field:NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -68,10 +70,8 @@ namespace ClassLibrary
             string st_1 = "V3Data";
             return (st_1 + " " + meas_ident + " " + d_time.ToString());
         }
+
         
-
-
-
     }
 
 }

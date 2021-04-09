@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp"
+        xmlns:local="clr-namespace:WpfApp" xmlns:classlibrary="clr-namespace:ClassLibrary;assembly=ClassLibrary" d:DataContext="{d:DesignInstance Type=classlibrary:V3MainCollection}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closed="WindowClosed">
     <Window.Resources>
@@ -55,20 +55,23 @@
         </Menu>
 
 
-        <ListBox Grid.Row="1" Grid.Column="1" Name ="lisBox_Main" ItemsSource="{Binding}"  />
+        <ListBox Grid.Row="1" Grid.Column="1" Name ="lisBox_Main" ItemsSource="{Binding}" SelectionChanged="lisBox_Main_SelectionChanged"  />
         
 
 
         
         <ListBox Name ="lisBox_DataCollection"  Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=FromZeroToPoint, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock  Grid.Row="2" Grid.Column="1" Text="{Binding Path=FromZeroToPoint, UpdateSourceTrigger=PropertyChanged}" />
+        
         <ListBox  Grid.Row="1" Grid.Column="2" Name ="lisBox_DataOnGrid" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
 
         <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
                  ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}, Path=lst_d}"
                  IsSynchronizedWithCurrentItem="True"
                  ItemTemplate="{StaticResource LisBox_details}"/>
+        
+        
         <StackPanel Grid.Row="2" Grid.Column="2">
             <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter3}}"/>
             <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter4}}"/>

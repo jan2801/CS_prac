@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Numerics;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 
 namespace ClassLibrary
 {
+    [Serializable]
+    [KnownType(typeof(Grid1D))]
     public class V3DataCollection: V3Data, IEnumerable<DataItem>
     {
 
