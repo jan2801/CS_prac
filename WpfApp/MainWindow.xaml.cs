@@ -7,6 +7,7 @@ using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Controls;
 using System.Windows.Data;
+
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -14,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClassLibrary;
+
+
 
 namespace WpfApp
 {
@@ -23,6 +26,8 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private V3MainCollection MainCollection { get; set; } = new V3MainCollection();
+
+        public static RoutedCommand AddCommand = new RoutedCommand("Add", typeof(WpfApp.MainWindow));
         public MainWindow()
         {
 
@@ -144,7 +149,8 @@ namespace WpfApp
 
         private void WindowClosed(object sender, EventArgs e)
         {
-            MessageBox.Show("Changes are not saved");
+            //MessageBox.Show("Changes are not saved");
+            if (MainCollection.changes == false) return;
             if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 SaveChanges();
@@ -226,6 +232,46 @@ namespace WpfApp
         }
 
         private void lisBox_Main_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddDataItem(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+
+        }
+
+        private void AddDataItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AddDataItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
 
         }

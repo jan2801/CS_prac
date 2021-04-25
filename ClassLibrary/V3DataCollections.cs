@@ -3,13 +3,14 @@ using System.Collections;
 using System.Numerics;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Collections.Specialized;
 
 
 namespace ClassLibrary
 {
     [Serializable]
     [KnownType(typeof(Grid1D))]
-    public class V3DataCollection: V3Data, IEnumerable<DataItem>
+    public class V3DataCollection: V3Data, IEnumerable<DataItem>, INotifyCollectionChanged
     {
 
 
@@ -22,7 +23,10 @@ namespace ClassLibrary
             lst_d = new List<DataItem>();
         }
 
-        
+        [field: NonSerialized]
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+
 
         public void InitRandom(int nItems, float xmax, float ymax, double minValue, double maxValue)
         {
@@ -117,6 +121,15 @@ namespace ClassLibrary
         {
             
             return lst_d.GetEnumerator();
+        }
+
+        public void Add(DataItem item)
+        {
+            //int c = lst_d.Count();
+            lst_d.Add(item);
+
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
 

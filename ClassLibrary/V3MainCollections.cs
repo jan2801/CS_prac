@@ -27,7 +27,11 @@ namespace ClassLibrary
     public class V3MainCollection : IEnumerable<V3Data>, INotifyCollectionChanged, INotifyPropertyChanged
     {
 
-        private bool changes = false;
+        public bool changes
+        {
+            set;
+            get;
+        }
 
         
         
@@ -105,6 +109,7 @@ namespace ClassLibrary
         private void CollectionChangedHandler(object source, NotifyCollectionChangedEventArgs args)
         {
             changes = true;
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("FromZeroToPoint"));
 
             
 

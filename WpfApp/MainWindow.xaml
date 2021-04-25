@@ -14,29 +14,38 @@
         <local:DetailsConverter2 x:Key="DetailsConverter2"/>
         <local:DetailsConverter3 x:Key="DetailsConverter3"/>
         <local:DetailsConverter4 x:Key="DetailsConverter4"/>
-        
+
 
         <DataTemplate x:Key="LisBox_details">
             <StackPanel>
                 <TextBlock Text="{Binding Path=coor, Converter={StaticResource DetailsConverter1}}"/>
                 <TextBlock Text="{Binding Path=electro_m_field, Converter={StaticResource DetailsConverter2}}"/>
-               
+
             </StackPanel>
         </DataTemplate>
 
-        
+
 
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="RemoveCommand_Executed" CanExecute="RemoveCommand_CanExecute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddCommand}" Executed="AddDataItemCommand_Executed" CanExecute="AddDataItemCommand_CanExecute"/>
+    </Window.CommandBindings>
     <Grid Height="434" VerticalAlignment="Center" HorizontalAlignment="Right" Width="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="100*"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">
             <MenuItem Header="File" Height="auto" Width="auto" >
@@ -50,34 +59,43 @@
                 <MenuItem Header="Add Default V3DataCollection" Click = "AddDefaultClickV3DataCollection"/>
                 <MenuItem Header="Add Default V3DataOnGrid" Click="AddDefaultClickV3DataOnGrid"/>
                 <MenuItem Header="Add Element from File" Click="AddV3DataOnGridFromFile"/>
+                <MenuItem Header="Add DataItem" Command="{x:Static local:MainWindow.AddCommand}"/>
                 <MenuItem Header="Remove" Click="RemoveElement"/>
             </MenuItem>
         </Menu>
 
 
         <ListBox Grid.Row="1" Grid.Column="1" Name ="lisBox_Main" ItemsSource="{Binding}" SelectionChanged="lisBox_Main_SelectionChanged"  />
-        
-
-
-        
         <ListBox Name ="lisBox_DataCollection"  Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
-
         <TextBlock  Grid.Row="2" Grid.Column="1" Text="{Binding Path=FromZeroToPoint, UpdateSourceTrigger=PropertyChanged}" />
-        
         <ListBox  Grid.Row="1" Grid.Column="2" Name ="lisBox_DataOnGrid" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
-
         <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
                  ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}, Path=lst_d}"
                  IsSynchronizedWithCurrentItem="True"
                  ItemTemplate="{StaticResource LisBox_details}"/>
-        
-        
+
+
         <StackPanel Grid.Row="2" Grid.Column="2">
             <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter3}}"/>
             <TextBlock Text="{Binding ElementName=lisBox_DataOnGrid, Path=SelectedItem, Converter={StaticResource DetailsConverter4}}"/>
 
         </StackPanel>
+
+        <ToolBar Grid.Row="0" Grid.Column="1" Margin="0,10,0,188" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button Command="ApplicationCommands.Open">Add</Button>
+            <Button Command="ApplicationCommands.Save">Save</Button>
+            <Button Command="{x:Static local:MainWindow.AddCommand}">Add DataItem</Button>
+            <Button Command="ApplicationCommands.Save">Remove</Button> 
+
+        </ToolBar>
+
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            <TextBlock > </TextBlock>
+            <TextBlock ></TextBlock>
+            <TextBlock ></TextBlock>
+        </StackPanel>
         
+
 
 
 
