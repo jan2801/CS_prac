@@ -14,6 +14,7 @@
         <local:DetailsConverter2 x:Key="DetailsConverter2"/>
         <local:DetailsConverter3 x:Key="DetailsConverter3"/>
         <local:DetailsConverter4 x:Key="DetailsConverter4"/>
+        <local:DetailsConverter5 x:Key="DetailsConverter5"/>
 
 
         <DataTemplate x:Key="LisBox_details">
@@ -91,9 +92,10 @@
         </ToolBar>
 
         <StackPanel Grid.Row="2" Grid.Column="3">
-            <TextBlock > </TextBlock>
-            <TextBlock ></TextBlock>
-            <TextBlock ></TextBlock>
+            <TextBlock>type x, y and field value in blocks under</TextBlock>
+            <TextBox Text="{Binding Path=x_coord, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
+            <TextBox Text="{Binding Path=y_coord, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
+            <TextBox Text="{Binding Path=field, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}"></TextBox> 
         </StackPanel>
         
 

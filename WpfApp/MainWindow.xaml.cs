@@ -10,6 +10,7 @@ using System.Windows.Data;
 
 using System.Windows.Documents;
 using System.Windows.Input;
+
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -26,6 +27,7 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private V3MainCollection MainCollection { get; set; } = new V3MainCollection();
+        private DataItemBinding DItem { get; set; }
 
         public static RoutedCommand AddCommand = new RoutedCommand("Add", typeof(WpfApp.MainWindow));
         public MainWindow()
@@ -243,6 +245,47 @@ namespace WpfApp
 
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            try
+            {
+                if (Changes_Detected())
+                {
+                    MessageBox.Show("Changes were detected");
+                    if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        SaveChanges();
+                        MessageBox.Show("Changes were saved");
+                    }
+                }
+
+                OpenFileDialog dlg = new OpenFileDialog
+                {
+                    Filter = "(*.txt) | *.txt | All files(*.*) | *.*",
+                    FilterIndex = 2
+                };
+
+                if (dlg.ShowDialog() == true)
+                {
+                    MainCollection = new V3MainCollection();
+                    MainCollection.Load(dlg.FileName);
+                    DataContext = MainCollection;
+                }
+            }
+
+            catch (Exception exe)
+            {
+                MessageBox.Show($"This file is not correct\n{exe.Message}");
+            }
+            
+        }
+
+        private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //MessageBox.Show("Trying to execute...");
+            e.CanExecute = MainCollection.changes;
+        }
+
+        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
             if (Changes_Detected())
             {
                 MessageBox.Show("Changes were detected");
@@ -252,29 +295,6 @@ namespace WpfApp
                     MessageBox.Show("Changes were saved");
                 }
             }
-
-            OpenFileDialog dlg = new OpenFileDialog
-            {
-                Filter = "(*.txt) | *.txt | All files(*.*) | *.*",
-                FilterIndex = 2
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-                MainCollection = new V3MainCollection();
-                MainCollection.Load(dlg.FileName);
-                DataContext = MainCollection;
-            }
-        }
-
-        private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-
-        }
-
-        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-
         }
 
         private void RemoveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -284,17 +304,21 @@ namespace WpfApp
 
         private void RemoveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-
+            e.CanExecute = (lisBox_Main != null);
         }
 
         private void AddDataItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            
         }
 
         private void AddDataItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-
+            if (DItem != null)
+            {
+                
+            }
+            else e.CanExecute = false;
         }
     }
 }

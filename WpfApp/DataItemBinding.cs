@@ -19,7 +19,7 @@ namespace WpfApp
         }
         public string Error { get { return "error"; } }
 
-        public float x_xoord
+        public float x_coord
         {
             get { return x; }
             set {

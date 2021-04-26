@@ -96,6 +96,23 @@ namespace WpfApp
 
     }
 
+    class DetailsConverter5 : IValueConverter
+    {
+        public object Convert(object val, Type tt, object par, CultureInfo cul)
+        {
+            return val;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.ToString();
+
+        }
+
+
+}
+
 
 
     /* class DetailsConverter2 : IValueConverter
