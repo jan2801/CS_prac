@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using ClassLibrary;
-
+using System.Numerics;
 
 namespace WpfApp
 {
@@ -49,11 +49,32 @@ namespace WpfApp
 
 
 
-        public string this[string columnName]
+        public string this[string s]
         {
             get
             {
+                string msg ="";
+                switch (s)
+                { 
+                    
+                    case "x":
+                        goto case "y";
+                    case "y":
+                        if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
+                        {
+                            msg = "This element is already in collection";
+                        }
+                        goto case "field";
 
+                    case "field":
+                        if (field < 0)
+                        {
+                            msg = "Value os the field can't be less then 0";
+                        }
+                        break;
+                }
+                return msg;
+                
             }
         }
 

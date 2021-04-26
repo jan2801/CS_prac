@@ -243,7 +243,28 @@ namespace WpfApp
 
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (Changes_Detected())
+            {
+                MessageBox.Show("Changes were detected");
+                if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    SaveChanges();
+                    MessageBox.Show("Changes were saved");
+                }
+            }
 
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Filter = "(*.txt) | *.txt | All files(*.*) | *.*",
+                FilterIndex = 2
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                MainCollection = new V3MainCollection();
+                MainCollection.Load(dlg.FileName);
+                DataContext = MainCollection;
+            }
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

@@ -27,6 +27,7 @@
 
 
     </Window.Resources>
+    
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute"/>
@@ -82,10 +83,10 @@
         </StackPanel>
 
         <ToolBar Grid.Row="0" Grid.Column="1" Margin="0,10,0,188" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Button Command="ApplicationCommands.Open">Add</Button>
+            <Button Command="ApplicationCommands.Open">Open</Button>
             <Button Command="ApplicationCommands.Save">Save</Button>
             <Button Command="{x:Static local:MainWindow.AddCommand}">Add DataItem</Button>
-            <Button Command="ApplicationCommands.Save">Remove</Button> 
+            <Button Command="ApplicationCommands.Delete">Remove</Button> 
 
         </ToolBar>
 
