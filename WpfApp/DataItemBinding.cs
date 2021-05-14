@@ -13,7 +13,7 @@ namespace WpfApp
         private float x, y;
         private double current_field;
         V3DataCollection DataCollection { get; set; }
-        public DataItemBinding(ref V3DataCollection col)
+        public DataItemBinding(V3DataCollection col)
         {
             DataCollection = col;
         }
@@ -85,9 +85,10 @@ namespace WpfApp
         }
 
 
-        public void Add(System.Numerics.Vector2 coordinates, double f)
+        public void Add()
         {
-            DataCollection.lst_d.Add(new DataItem(coordinates, f));
+            Vector2 cooordinates = new Vector2(x_coord, y_coord);
+            DataCollection.lst_d.Add(new DataItem(cooordinates, field));
         }
     }
 }

@@ -26,6 +26,8 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
         private V3MainCollection MainCollection { get; set; } = new V3MainCollection();
         private DataItemBinding DItem { get; set; }
 
@@ -280,7 +282,6 @@ namespace WpfApp
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //MessageBox.Show("Trying to execute...");
             e.CanExecute = MainCollection.changes;
         }
 
@@ -299,26 +300,50 @@ namespace WpfApp
 
         private void RemoveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            MessageBox.Show("Item will be removed");
+            MainCollection.Remove(lisBox_Main.SelectedIndex);
         }
 
         private void RemoveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (lisBox_Main != null);
+            if (lisBox_Main != null)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void AddDataItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            DItem.Add();
+            MessageBox.Show("Data Item was added");
+            if (lisBox_DataCollection.SelectedItem as V3DataCollection != null)
+            {
+                DItem = new DataItemBinding(lisBox_DataCollection.SelectedItem as V3DataCollection);
+                DIX.DataContext = DItem;
+                DIY.DataContext = DItem;
+                DIV.DataContext = DItem;
+            }
+
         }
 
         private void AddDataItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (DItem != null)
             {
-                
+                if (lisBox_DataCollection.SelectedItem as V3DataCollection == null)
+                {
+
+                    e.CanExecute = false;
+                    return;
+                }
+                else if(Validation.GetHasError(DIX) == false && Validation.GetHasError(DIY) == false && Validation.GetHasError(DIV) == false)
+                {
+                    e.CanExecute = true;
+                    return;
+                }
             }
             else e.CanExecute = false;
+            //return;
         }
     }
 }

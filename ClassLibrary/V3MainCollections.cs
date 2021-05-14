@@ -21,8 +21,7 @@ namespace ClassLibrary
 
     public delegate void DataChangedEventHandler(object source, DataChangedEventArgs args);
 
-
-
+   
     [Serializable]
     public class V3MainCollection : IEnumerable<V3Data>, INotifyCollectionChanged, INotifyPropertyChanged
     {
@@ -215,7 +214,13 @@ namespace ClassLibrary
             
         }
 
-
+        public void Remove(int ind)
+        {
+            int i = ind;
+            v3.RemoveAt(i);
+            CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $"now it is {v3.Count} items"));
+        }
         public bool Remove(string id, DateTime date)
         {
             bool k = false;
