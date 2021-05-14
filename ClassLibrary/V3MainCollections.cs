@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
+using System.Windows;
 
 
 namespace ClassLibrary
@@ -218,8 +219,9 @@ namespace ClassLibrary
         {
             int i = ind;
             v3.RemoveAt(i);
-            CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            DataChanged(this, new DataChangedEventArgs(ChangeInfo.Remove, $"now it is {v3.Count} items"));
+         
+            CollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            DataChanged?.Invoke(this, new DataChangedEventArgs(ChangeInfo.Remove, $"it is {v3.Count} items now"));
         }
         public bool Remove(string id, DateTime date)
         {

@@ -27,7 +27,7 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
 
-        
+
         private V3MainCollection MainCollection { get; set; } = new V3MainCollection();
         private DataItemBinding DItem { get; set; }
 
@@ -50,13 +50,13 @@ namespace WpfApp
             var i = args.Item;
             if (i != null)
             {
-                
+
                 if (i.GetType() == typeof(V3DataOnGrid))
                     args.Accepted = true;
                 else
                     args.Accepted = false;
             }
-        } 
+        }
 
         private void NewClick(object sender, RoutedEventArgs e)
         {
@@ -89,16 +89,16 @@ namespace WpfApp
                 if ((dlg.ShowDialog() == true) && (MainCollection != null))
                 {
                     MainCollection.Save(dlg.FileName);
-                    
+
                 }
-                    
+
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("SaveChanges() error\n" + ex.Message);
             }
-            
+
         }
 
         private bool Changes_Detected()
@@ -193,9 +193,9 @@ namespace WpfApp
                     args.Accepted = false;
             }
         }
-    
-       
-        
+
+
+
 
         private void AddDefaultClickV3DataOnGrid(object sender, RoutedEventArgs e)
         {
@@ -223,11 +223,11 @@ namespace WpfApp
             }
         }
 
-        
+
 
         private void RemoveElement(object sender, RoutedEventArgs e)
         {
-            
+
             if (lisBox_Main.SelectedItem is V3Data selected)
             {
                 MessageBox.Show("Item will be removed");
@@ -277,7 +277,7 @@ namespace WpfApp
             {
                 MessageBox.Show($"This file is not correct\n{exe.Message}");
             }
-            
+
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -306,7 +306,7 @@ namespace WpfApp
 
         private void RemoveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (lisBox_Main != null)
+            if ((lisBox_Main.SelectedIndex >= 0) && (lisBox_Main != null))
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -328,22 +328,49 @@ namespace WpfApp
 
         private void AddDataItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (DItem != null)
+            /*
+            if (lisBox_DataCollection.SelectedItem as V3DataCollection == null)
             {
-                if (lisBox_DataCollection.SelectedItem as V3DataCollection == null)
-                {
 
-                    e.CanExecute = false;
-                    return;
-                }
-                else if(Validation.GetHasError(DIX) == false && Validation.GetHasError(DIY) == false && Validation.GetHasError(DIV) == false)
-                {
-                    e.CanExecute = true;
-                    return;
-                }
+                e.CanExecute = false;
+                return;
             }
-            else e.CanExecute = false;
+
+            //this.listBox_DataCollection.SelectedItem
+
+            if (DIX == null || DIY == null || DIV == null)
+            {
+                e.CanExecute = false;
+
+            }
+            else if (Validation.GetHasError(DIX) || Validation.GetHasError(DIY) || Validation.GetHasError(DIV))
+            {
+                e.CanExecute = false;
+            }
+            else
+                e.CanExecute = true;
+            return;
+
+            */
+
+            if (DIX == null || DIY == null || DIV == null)
+            {
+                e.CanExecute = false;
+                return;
+            }
+            else if (Validation.GetHasError(DIX) || Validation.GetHasError(DIY) || Validation.GetHasError(DIV))
+            {
+                e.CanExecute = false;
+                return;
+            }
+            else
+                e.CanExecute = true;
+            return;
+            
+
+            
             //return;
         }
     }
 }
+
