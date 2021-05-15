@@ -82,13 +82,7 @@ namespace WpfApp
                             }
                             break;
 
-                        /*
-                            if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
-                                {
-                                    msg = "This element is already in collection";
-                                }
-                                goto case "field";
-                        */
+                       
                         case "field":
                             if (field < 0)
                             {
