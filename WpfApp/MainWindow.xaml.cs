@@ -323,53 +323,20 @@ namespace WpfApp
             {
                 DItem.Add();
                 MessageBox.Show("Data Item was added");
-                /*if (lisBox_DataCollection.SelectedItem as V3DataCollection != null)
-                {
-                    DItem = new DataItemBinding(ref (lisBox_DataCollection.SelectedItem as V3DataCollection));
-                    DIX.DataContext = DItem;
-                    DIY.DataContext = DItem;
-                    DIV.DataContext = DItem;
-                } */
-                //mainCollection.AddDataCollection();
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
-            /*
-            DItem.Add();
-            MessageBox.Show("Data Item was added");
-            if (lisBox_DataCollection.SelectedItem as V3DataCollection != null)
-            {
-                DItem = new DataItemBinding(lisBox_DataCollection.SelectedItem as V3DataCollection);
-                DIX.DataContext = DItem;
-                DIY.DataContext = DItem;
-                DIV.DataContext = DItem;
-            }
-            */
+            
         }
 
         private void AddDataItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
 
 
-            /*
-            //this.listBox_DataCollection.SelectedItem
-
-            if (DIX == null || DIY == null || DIV == null)
-            {
-                e.CanExecute = false;
-
-            }
-            else if (Validation.GetHasError(DIX) || Validation.GetHasError(DIY) || Validation.GetHasError(DIV))
-            {
-                e.CanExecute = false;
-            }
-            else
-                e.CanExecute = true;
-            return;
-
-            */
+           
             if (DItem != null)
             {
                 if (DItem.DataCollection == null)
@@ -392,20 +359,7 @@ namespace WpfApp
                     e.CanExecute = false;
                 
 
-                /*if (DIX == null || DIY == null || DIV == null || DItem == null)
-                {
-                    e.CanExecute = false;
-                    
-                }
-
-                else if (Validation.GetHasError(DIX) || Validation.GetHasError(DIY) || Validation.GetHasError(DIV))
-                {
-                    e.CanExecute = false;
-                    
-                }
-                else
-                    e.CanExecute = true;
-                return; */
+               
             }
             else
             {
