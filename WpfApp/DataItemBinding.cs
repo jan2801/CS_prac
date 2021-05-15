@@ -7,24 +7,27 @@ using System.Numerics;
 
 namespace WpfApp
 {
-    class DataItemBinding: IDataErrorInfo, INotifyPropertyChanged
+    class DataItemBinding : IDataErrorInfo, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private float x, y;
         private double current_field;
         V3DataCollection DataCollection { get; set; }
-        public DataItemBinding(V3DataCollection col)
+        public DataItemBinding(ref V3DataCollection col)
         {
             DataCollection = col;
+            
         }
         public string Error { get { return "error"; } }
 
         public float x_coord
         {
             get { return x; }
-            set {
+            set
+            {
                 x = value;
                 PropertyChangedDetected("x");
+                PropertyChangedDetected("y");
 
             }
         }
@@ -32,16 +35,19 @@ namespace WpfApp
         public float y_coord
         {
             get { return y; }
-            set {
+            set
+            {
                 y = value;
                 PropertyChangedDetected("y");
+                PropertyChangedDetected("x");
             }
         }
 
         public double field
         {
             get { return current_field; }
-            set {
+            set
+            {
                 current_field = value;
                 PropertyChangedDetected("field");
             }
@@ -53,10 +59,10 @@ namespace WpfApp
         {
             get
             {
-                string msg ="";
+                string msg = "";
                 switch (s)
-                { 
-                    
+                {
+
                     case "x":
                         goto case "y";
                     case "y":
@@ -74,7 +80,7 @@ namespace WpfApp
                         break;
                 }
                 return msg;
-                
+
             }
         }
 
@@ -89,6 +95,10 @@ namespace WpfApp
         {
             Vector2 cooordinates = new Vector2(x_coord, y_coord);
             DataCollection.lst_d.Add(new DataItem(cooordinates, field));
+            PropertyChangedDetected("x");
+            PropertyChangedDetected("y");
+            PropertyChangedDetected("field");
+
         }
     }
 }

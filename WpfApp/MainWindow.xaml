@@ -71,7 +71,7 @@
         <ListBox Name ="lisBox_DataCollection"  Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}}"/>
         <TextBlock  Grid.Row="2" Grid.Column="1" Text="{Binding Path=FromZeroToPoint, UpdateSourceTrigger=PropertyChanged}" />
         <ListBox  Grid.Row="1" Grid.Column="2" Name ="lisBox_DataOnGrid" ItemsSource="{Binding Source={StaticResource LisBox_DataOnGrid_source}}"/>
-        <ListBox Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
+        <ListBox  Grid.Row="2" Grid.Column="0" Name ="lisBox_details"
                  ItemsSource="{Binding Source={StaticResource LisBox_DataCollection_source}, Path=lst_d}"
                  IsSynchronizedWithCurrentItem="True"
                  ItemTemplate="{StaticResource LisBox_details}"/>
@@ -91,7 +91,7 @@
 
         </ToolBar>
 
-        <StackPanel Grid.Row="2" Grid.Column="3">
+        <StackPanel Grid.Row="2" Grid.Column="3" >
             <TextBlock>type x, y and field value</TextBlock>
             <TextBox Name="DIX" Text="{Binding Path=x_coord, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
             <TextBox Name="DIY" Text="{Binding Path=y_coord, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
