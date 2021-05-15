@@ -42,7 +42,7 @@ namespace WpfApp
 
             //V3MainCollection MainCollection = new V3MainCollection();
             this.DataContext = MainCollection;
-            lisBox_Main.ItemsSource = MainCollection;
+            //lisBox_Main.ItemsSource = MainCollection;
             lisBox_Main.SelectionChanged += lisBox_Main_SelectionChanged;
             Valid_stack.DataContext = DItem;
            
@@ -248,6 +248,7 @@ namespace WpfApp
                 DataCOllection = null;
             DItem = new DataItemBinding(ref DataCOllection);
             Valid_stack.DataContext = DItem;
+
         }
 
         
@@ -293,15 +294,12 @@ namespace WpfApp
 
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (Changes_Detected())
-            {
-                MessageBox.Show("Changes were detected");
-                if (MessageBox.Show("Do you want to save changes?", " ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    SaveChanges();
-                    MessageBox.Show("Changes were saved");
-                }
-            }
+            
+             MessageBox.Show("Saving now");
+            
+             SaveChanges();
+                 
+            
         }
 
         private void RemoveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -374,7 +372,11 @@ namespace WpfApp
             */
             if (DItem != null)
             {
-                if (DIX == null || DIY == null || DIV == null || DItem == null)
+                if (DItem.DataCollection == null)
+                {
+                    e.CanExecute = false;
+                }
+                else if (DIX == null || DIY == null || DIV == null || DItem == null)
                 {
                     e.CanExecute = false;
 

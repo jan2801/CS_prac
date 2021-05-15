@@ -93,8 +93,8 @@
         <StackPanel Grid.Row="2" Grid.Column="3" x:Name="Valid_stack">
             <TextBlock>type x, y and field value</TextBlock>
             <TextBox Name="DIX" Text="{Binding Path=x_coord, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
-            <TextBox Name="DIY" Text="{Binding Path=y_coord, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
-            <TextBox Name="DIV" Text="{Binding Path=field, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}"></TextBox> 
+            <TextBox Name="DIY" Text="{Binding Path=y_coord, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}" TextWrapping="Wrap"></TextBox>
+            <TextBox Name="DIV" Text="{Binding Path=field, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DetailsConverter5}}"></TextBox> 
         </StackPanel>
         
 

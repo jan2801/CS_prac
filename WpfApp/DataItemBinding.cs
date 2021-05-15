@@ -12,7 +12,7 @@ namespace WpfApp
         public event PropertyChangedEventHandler PropertyChanged;
         private float x, y;
         private double current_field;
-        V3DataCollection DataCollection { get; set; }
+        public V3DataCollection DataCollection { get; set; }
         public DataItemBinding(ref V3DataCollection col)
         {
             DataCollection = col;
@@ -27,7 +27,7 @@ namespace WpfApp
             {
                 x = value;
                 PropertyChangedDetected("x");
-                PropertyChangedDetected("y");
+                
 
             }
         }
@@ -39,7 +39,7 @@ namespace WpfApp
             {
                 y = value;
                 PropertyChangedDetected("y");
-                PropertyChangedDetected("x");
+                
             }
         }
 
@@ -57,39 +57,45 @@ namespace WpfApp
 
         public string this[string s]
         {
+
             get
             {
                 string msg = "";
-                switch (s)
+                if (DataCollection != null)
                 {
 
-                    case "x":
-                        goto case "y";
-                    case "y":
 
-                        foreach (var el in DataCollection.lst_d)
-                        {
-                            if (el.coor.X == x_coord && el.coor.Y == y_coord)
+                    switch (s)
+                    {
+
+                        case "x":
+                            goto case "y";
+                        case "y":
+
+                            foreach (var el in DataCollection.lst_d)
                             {
-                                msg = "This element is already in collection";
-                                break;
+                                if (el.coor.X == x_coord && el.coor.Y == y_coord)
+                                {
+                                    msg = "This element is already in collection";
+                                    break;
+                                }
                             }
-                        }
-                        break;
-                
-                /*
-                    if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
-                        {
-                            msg = "This element is already in collection";
-                        }
-                        goto case "field";
-                */
-                    case "field":
-                        if (field < 0)
-                        {
-                            msg = "Value os the field can't be less then 0";
-                        }
-                        break;
+                            break;
+
+                        /*
+                            if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
+                                {
+                                    msg = "This element is already in collection";
+                                }
+                                goto case "field";
+                        */
+                        case "field":
+                            if (field < 0)
+                            {
+                                msg = "Value os the field can't be less then 0";
+                            }
+                            break;
+                    }
                 }
                 return msg;
 
