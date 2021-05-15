@@ -43,6 +43,8 @@ namespace WpfApp
             //V3MainCollection MainCollection = new V3MainCollection();
             this.DataContext = MainCollection;
             lisBox_Main.ItemsSource = MainCollection;
+            lisBox_Main.SelectionChanged += lisBox_Main_SelectionChanged;
+            Valid_stack.DataContext = DItem;
            
         }
 
@@ -245,7 +247,7 @@ namespace WpfApp
             else
                 DataCOllection = null;
             DItem = new DataItemBinding(ref DataCOllection);
-            //AddDI.DataContext = DItem;
+            Valid_stack.DataContext = DItem;
         }
 
         

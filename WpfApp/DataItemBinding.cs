@@ -66,12 +66,24 @@ namespace WpfApp
                     case "x":
                         goto case "y";
                     case "y":
-                        if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
+
+                        foreach (var el in DataCollection.lst_d)
+                        {
+                            if (el.coor.X == x_coord && el.coor.Y == y_coord)
+                            {
+                                msg = "This element is already in collection";
+                                break;
+                            }
+                        }
+                        break;
+                
+                /*
+                    if (DataCollection.lst_d.Contains(new DataItem(new Vector2(x, y), field)))
                         {
                             msg = "This element is already in collection";
                         }
                         goto case "field";
-
+                */
                     case "field":
                         if (field < 0)
                         {
@@ -94,7 +106,7 @@ namespace WpfApp
         public void Add()
         {
             Vector2 cooordinates = new Vector2(x_coord, y_coord);
-            DataCollection.lst_d.Add(new DataItem(cooordinates, field));
+            DataCollection.Add(new DataItem(cooordinates, field));
             PropertyChangedDetected("x");
             PropertyChangedDetected("y");
             PropertyChangedDetected("field");
