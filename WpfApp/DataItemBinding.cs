@@ -22,7 +22,7 @@ namespace WpfApp
             set
             {
                 x = value;
-                PropertyChangedDetected("x");
+                PropertyChangedDetected("x_coord");
 
                 
 
@@ -35,7 +35,7 @@ namespace WpfApp
             set
             {
                 y = value;
-                PropertyChangedDetected("y");
+                PropertyChangedDetected("y_coord");
                 
             }
         }
@@ -65,7 +65,7 @@ namespace WpfApp
                     switch (s)
                     {
 
-                        case "x":
+                        case "x_coord":
                             foreach (var el in DataCollection.lst_d)
                             {
                                 Console.WriteLine($"{el.coor.X}");
@@ -77,7 +77,7 @@ namespace WpfApp
                                 }
                             }
                             break;
-                        case "y":
+                        case "y_coord":
 
                             
                             foreach (var el in DataCollection.lst_d)
@@ -114,7 +114,7 @@ namespace WpfApp
         public void PropertyChangedDetected(string s)
         {
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs($"{s} property was changed"));
+                PropertyChanged(this, new PropertyChangedEventArgs(s));
         }
 
 
@@ -122,8 +122,8 @@ namespace WpfApp
         {
             Vector2 cooordinates = new Vector2(x_coord, y_coord);
             DataCollection.Add(new DataItem(cooordinates, field));
-            PropertyChangedDetected("x");
-            PropertyChangedDetected("y");
+            PropertyChangedDetected("x_coord");
+            PropertyChangedDetected("y_coord");
             PropertyChangedDetected("field");
 
         }

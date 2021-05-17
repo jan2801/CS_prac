@@ -21,3 +21,49 @@ C:\Users\anton\source\repos\Solution\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary
 C:\Users\anton\source\repos\Solution\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary.pdb
 C:\Users\anton\source\repos\Solution\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csproj.CopyComplete
 C:\Users\anton\source\repos\Solution\WpfApp\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.exe
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.deps.json
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.runtimeconfig.json
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.runtimeconfig.dev.json
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.dll
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.pdb
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary.dll
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary.pdb
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csprojAssemblyReference.cache
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp_MarkupCompile.cache
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp_MarkupCompile.lref
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.g.resources
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.AssemblyInfoInputs.cache
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.AssemblyInfo.cs
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csproj.CoreCompileInputs.cache
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csproj.CopyComplete
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.dll
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.pdb
+C:\Users\Nikita\Desktop\CS_prac-lab2_wpf\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.genruntimeconfig.cache
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.exe
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.deps.json
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.runtimeconfig.json
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.runtimeconfig.dev.json
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.dll
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\WpfApp.pdb
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary.dll
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\bin\Debug\netcoreapp3.1\ClassLibrary.pdb
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csprojAssemblyReference.cache
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\App.g.cs
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp_MarkupCompile.cache
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp_MarkupCompile.lref
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.g.resources
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.AssemblyInfoInputs.cache
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.AssemblyInfo.cs
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csproj.CoreCompileInputs.cache
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.csproj.CopyComplete
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.dll
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.pdb
+D:\University\6sem\Березина\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\WpfApp\obj\Debug\netcoreapp3.1\WpfApp.genruntimeconfig.cache

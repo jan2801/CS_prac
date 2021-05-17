@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anton\\source\\repos\\Solution\\WpfApp\\WpfApp.csproj": {}
+    "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\WpfApp\\WpfApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\ClassLibrary.csproj": {
+    "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\ClassLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\ClassLibrary.csproj",
+        "projectUniqueName": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\ClassLibrary.csproj",
         "projectName": "ClassLibrary",
-        "projectPath": "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\ClassLibrary.csproj",
+        "projectPath": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\ClassLibrary.csproj",
         "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\obj\\",
+        "outputPath": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -61,14 +61,14 @@
         }
       }
     },
-    "C:\\Users\\anton\\source\\repos\\Solution\\WpfApp\\WpfApp.csproj": {
+    "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\WpfApp\\WpfApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\source\\repos\\Solution\\WpfApp\\WpfApp.csproj",
+        "projectUniqueName": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\WpfApp\\WpfApp.csproj",
         "projectName": "WpfApp",
-        "projectPath": "C:\\Users\\anton\\source\\repos\\Solution\\WpfApp\\WpfApp.csproj",
+        "projectPath": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\WpfApp\\WpfApp.csproj",
         "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\source\\repos\\Solution\\WpfApp\\obj\\",
+        "outputPath": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\WpfApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,8 +88,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\ClassLibrary.csproj": {
-                "projectPath": "C:\\Users\\anton\\source\\repos\\Solution\\ClassLibrary\\ClassLibrary.csproj"
+              "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\ClassLibrary.csproj": {
+                "projectPath": "D:\\University\\6sem\\Березина\\ВСЁ РАБОТАЕТ НЕ ТРОГАЙ\\ClassLibrary\\ClassLibrary.csproj"
               }
             }
           }
