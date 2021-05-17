@@ -248,6 +248,9 @@ namespace WpfApp
                 DataCOllection = null;
             DItem = new DataItemBinding(ref DataCOllection);
             Valid_stack.DataContext = DItem;
+            DIX.DataContext = DItem;
+            DIY.DataContext = DItem;
+            DIV.DataContext = DItem;
 
         }
 
